@@ -17,10 +17,18 @@ int main()
 	sf::Text text("Hello SFML", font, 50);
 	// Load a music to play
 	sf::Music music;
-	if (!music.openFromFile("beng.ogg"))
+	if (!music.openFromFile("start.wav"))
 		return EXIT_FAILURE;
 	// Play the music
+	music.setLoop(true);
 	music.play();
+
+	sf::SoundBuffer buffer;
+	buffer.loadFromFile("beng.ogg");
+	sf::Sound sound;
+	sound.setBuffer(buffer);
+	//sound.play();
+
 	 //Start the game loop
 	while (window.isOpen())
 	{
@@ -31,6 +39,12 @@ int main()
 			// Close window: exit
 			if (event.type == sf::Event::Closed)
 				window.close();
+
+			if (event.key.code == sf::Keyboard::V)
+			{
+				sound.play();
+			}
+
 		}
 		// Clear screen
 		window.clear();
